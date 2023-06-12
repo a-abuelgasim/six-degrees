@@ -1,0 +1,14 @@
+$black: #020911;
+
+:root {
+	--color-accent: #d8315b;
+	--color-accent-light: #ffc49b;
+	--color-black: #{$black};
+	--color-dark: #24344b;
+	--color-light: #bcd2ee;
+	--color-main: #274472;
+	--color-white: #fff;
+	--color-text: var(--color-dark);
+	--color-text-inv: var(--color-white);
+	--color-focus: var(--color-accent-light);
+}

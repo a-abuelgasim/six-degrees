@@ -1,0 +1,96 @@
+@use 'sass:map';
+@use '../sass/common/constants' as c;
+@use '../sass/common/mixins' as *;
+
+.settings {
+	&__heading {
+		margin: map.get(c.$spaces, md) 0 map.get(c.$spaces, md);
+	}
+
+	&__subheading {
+		margin-bottom: map.get(c.$spaces, xs);
+	}
+
+	&__card {
+		--settings-card-shared-margin-bottom: #{map.get(c.$spaces, md)};
+		--settings-card-shared-padding: #{map.get(c.$spaces, sm)};
+
+		padding: var(--settings-card-shared-padding);
+
+		@include mq(tablet) {
+			--settings-card-shared-margin-bottom: #{map.get(c.$spaces, lg)};
+			--settings-card-shared-padding: #{map.get(c.$spaces, md)};
+		}
+	}
+
+	&__main-p,
+	&__form {
+		font-size: 2rem;
+	}
+
+	&__main-p {
+		margin-bottom: var(--settings-card-shared-margin-bottom);
+	}
+
+	&__form {
+		border: 1px solid var(--color-dark);
+		border-radius: c.$border-radius;
+		margin: 0 auto var(--settings-card-shared-margin-bottom);
+		max-width: 350px;
+		padding: var(--settings-card-shared-padding);
+	}
+
+	&__label {
+		align-items: baseline;
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: map.get(c.$spaces, xs);
+	}
+
+	&__input {
+		--input-accent-color: var(--color-accent);
+
+		accent-color: var(--input-accent-color);
+		transform: scale(1.5);
+
+		&:focus {
+			outline-color: var(--input-accent-color);
+		}
+	}
+
+	&__fieldset {
+		border: none;
+		margin: map.get(c.$spaces, md) 0 map.get(c.$spaces, sm);
+	}
+
+	&__legend {
+		font-size: 2.2rem;
+		font-weight: 700;
+		text-align: center;
+	}
+
+	&__btn {
+		margin: 0 auto;
+	}
+
+	&__attribution {
+		align-items: center;
+		display: flex;
+		flex-wrap: wrap;
+		font-size: 1.4rem;
+		gap: .25em;
+		justify-content: center;
+	}
+
+	&__logo {
+		height: 1em;
+
+		&--iconduck {
+			align-self: baseline;
+		}
+	}
+
+	&__footnote {
+		font-size: 1.2rem;
+	}
+}

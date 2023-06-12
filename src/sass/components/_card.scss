@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use '../common/constants' as c;
+@use '../common/colors';
+@use '../common/mixins' as *;
+
+$heading-line-height: 1.3em;
+
+.card {
+	@include box-shadow;
+
+	$icon-size: 5rem;
+
+	background-color: var(--color-white);
+	border: 1px solid rgba(colors.$black, .2);
+	border-radius: c.$border-radius;
+	color: var(--color-text);
+	padding: map.get(c.$spaces, sm);
+
+	&__header,
+	&__heading,
+	&__subheading {
+		margin-bottom: map.get(c.$spaces, xs);
+	}
+
+	&__header {
+		align-items: p;
+		display: flex;
+		gap: .75em;
+	}
+
+	&__icon {
+		position: relative;
+		top: 2px;
+		width: $icon-size;
+	}
+
+	&__header-text {
+		* {
+			margin: 0;
+		}
+	}
+
+	&__eyebrow {
+		font-weight: 600;
+	}
+
+	&__heading {
+		font-size: 2.25rem;
+		font-weight: 700;
+		line-height: $heading-line-height;
+	}
+
+	&__subheading {
+		font-size: 2rem;
+		font-weight: 700;
+	}
+
+	&__p:not(:last-of-type) {
+		margin-bottom: map.get(c.$spaces, xs);
+	}
+
+	&__btns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: map.get(c.$spaces, sm);
+		justify-content: flex-end;
+		margin-top: map.get(c.$spaces, sm);
+	}
+}

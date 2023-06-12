@@ -1,0 +1,67 @@
+@use 'sass:map';
+@use './mixins' as *;
+@use './constants' as c;
+
+// General styles
+*,
+*::after,
+*::before {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	// stylelint-disable value-keyword-case
+	text-rendering: optimizeLegibility;
+	// stylelint-enable value-keyword-case
+}
+
+
+html {
+	box-sizing: border-box;
+	height: 100%;
+}
+
+body {
+	background: var(--color-main);
+	color: var(--color-text-inv);
+	min-height: 100%;
+	padding: map.get(c.$spaces, sm) 0 map.get(c.$spaces, xl);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-weight: 700;
+	margin: 0;
+}
+
+a {
+	color: var(--link-color, var(--color-accent));
+	font-weight: 700;
+	text-decoration: none;
+
+	&:focus-visible {
+		outline: 2px solid var(--color-accent);
+	}
+
+	&:hover {
+		color: var(--link-hover-color, var(--color-focus));
+	}
+
+	&.light-link {
+		--link-color: var(--color-accent-light);
+		--link-hover-color: var(--color-accent);
+	}
+}
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}

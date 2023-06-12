@@ -1,0 +1,98 @@
+@use 'sass:map';
+@use './colors' as colors;
+@use './constants' as c;
+
+
+@mixin box-shadow($mirror: null) {
+	$modifier: if($mirror, -1, 1);
+
+	box-shadow: ($modifier * 15px) 15px 20px -2px rgba(colors.$black, .2);
+}
+
+// Media queries
+@mixin mq($from: null, $until: null, $only: null) {
+	// A mixin for applying responsive properties, takes in device names (tablet, desktop, wide)
+	// then uses corresponsing values from c.$breakpoints map in ./_variables.scss, or pixel values.
+	//
+	// Examples:
+	// for c.$breakpoints: (tablet: 600px, desktop: 1024px, wide: 1440px)
+	// @include mq($from: tablet) or @include mq(tablet): 600px and up
+	// @include mq($from: 430px) or @include mq(430px): 430px and up
+	// @include mq($until: wide): less than 1440px (up to 1439px)
+	// @include mq($from: 200px,$until: tablet) or @include mq(200px,tablet): 200px until 599px (200px <= x < 600px)
+	// @include mq($only: desktop): 1024px until 1440px (1024px <= x < 1439px)
+	// sass-lint:disable-block brace-style
+	// ONLY
+	@if $only { // if $only given, ignore user $from and $until values and set these
+		// Map device names to breakpoint values in ./_variables.scss for $from and $until
+		@if $only == 'tablet' {
+			$from: map.get(c.$breakpoints, tablet);
+			$until: map.get(c.$breakpoints, desktop);
+		} @else if $only == 'desktop' {
+			$from: map.get(c.$breakpoints, desktop);
+			$until: map.get(c.$breakpoints, wide);
+		}
+	} @else {
+		// FROM
+		// Map device names to breakpoint values in ./_variables.scss for $from
+		@if $from == 'tablet' {
+			$from: map.get(c.$breakpoints, tablet);
+		} @else if $from == 'desktop' {
+			$from: map.get(c.$breakpoints, desktop);
+		} @else if $from == 'wide' {
+			$from: map.get(c.$breakpoints, wide);
+		}
+
+		// Map device names to breakpoint values in ./_variables.scss for $until
+		@if $until == 'tablet' {
+			$until: map.get(c.$breakpoints, tablet);
+		} @else if $until == 'desktop' {
+			$until: map.get(c.$breakpoints, desktop);
+		} @else if $until == 'wide' {
+			$until: map.get(c.$breakpoints, wide);
+		}
+	}
+
+	@if $from {
+		@if $until { // if both $from and $until given (by user or due to $only being given)
+			@media (width >= $from) and (width < $until) { @content; }
+		} @else { // if only $from given
+			@media (width >= $from) { @content; }
+		}
+	} @else if $until { // if only $until given
+		@media (width < $until) { @content; }
+	}
+}
+
+// Mixin providing the styles for a SVG icon mask-image
+@mixin svg-mask($bg-color: var(--color-accent), $svg-url: '/imgs/blob.svg') {
+	background-color: $bg-color;
+	content: '';
+	mask-image: url($svg-url);
+	mask-repeat: no-repeat;
+	mask-size: 100% 100%;
+	position: absolute;
+}
+
+// Mixin for applying an SVG icon as a background mask-image to the ::before pseudo-element of an element
+@mixin svg-mask-item($color: var(--color-accent), $svg-url: '/imgs/blob.svg') {
+	padding: .75em 1.25em .5em;
+	position: relative;
+	z-index: 0;
+
+	&::before {
+		@include svg-mask($color, $svg-url);
+
+		inset: 0 0 -.125em;
+		z-index: -1;
+	}
+
+	&:nth-of-type(even)::before {
+		transform: scaleY(-1);
+	}
+}
+
+
+@mixin text-shadow {
+	text-shadow: 2px 2px var(--color-black);
+}

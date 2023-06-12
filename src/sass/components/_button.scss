@@ -1,0 +1,34 @@
+@use '../common/constants' as c;
+@use '../common/mixins' as *;
+
+:root {
+	--btn-size: 40px;
+}
+
+.btn {
+	align-items: center;
+	background-color: var(--color-accent);
+	border-radius: 50%;
+	border-width: 0;
+	color: var(--color-text-inv);
+	cursor: pointer;
+	display: flex;
+	height: var(--btn-size);
+	justify-content: center;
+	transition: color c.$transition, background-color c.$transition;
+	width: var(--btn-size);
+
+	&:hover,
+	&:focus {
+		background-color: var(--color-focus);
+		color: var(--color-dark);
+		outline: none;
+	}
+
+	svg {
+		$btn-svg-size: calc(var(--btn-size) * .5);
+
+		height: $btn-svg-size;
+		width: $btn-svg-size;
+	}
+}

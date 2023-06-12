@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use '../common/constants' as c;
+@use '../common/mixins' as *;
+
+html {
+	font-family: Assistant, sans-serif;
+	font-size: 8px;
+
+	@include mq(tablet) {
+		font-size: 10px;
+	}
+}
+
+body {
+	font-size: 1.8rem;
+}
+
+.section-heading {
+	font-size: 2.5rem;
+	font-weight: 800;
+	margin-bottom: map.get(c.$spaces, lg);
+	text-align: center;
+
+	span {
+		@include svg-mask-item;
+	}
+}
+
+.handwriting {
+	font-family: 'Gloria Hallelujah', sans-serif;
+}
+
+.text-sm {
+	font-size: max(12px, 1.6rem);
+}

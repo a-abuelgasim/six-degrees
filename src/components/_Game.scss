@@ -1,0 +1,71 @@
+@use 'sass:map';
+@use '../sass/common/constants' as c;
+
+$item-card-gap: map.get(c.$spaces, md);
+
+// Adds a connecting path between chain items
+@mixin path() {
+	&::before {
+		background: url('/imgs/path.svg') no-repeat 0 0/contain;
+		content: '';
+		height: $item-card-gap;
+		left: 45%;
+		position: absolute;
+		width: 100px;
+	}
+}
+
+.game {
+	&__header {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__logo {
+		width: var(--btn-size);
+	}
+
+	&__btns {
+		display: flex;
+		gap: map.get(c.$spaces, sm);
+	}
+
+	&__heading,
+	&__goal {
+		font-weight: 700;
+		text-align: center;
+	}
+
+	&__heading {
+		font-size: 2.7rem;
+		margin-top: map.get(c.$spaces, md);
+	}
+
+	&__goal {
+		$height: 1.5em;
+
+		font-size: 2.2rem;
+		height: $height;
+		line-height: $height;
+		margin: map.get(c.$spaces, sm) 0;
+	}
+
+	&__separator {
+		height: $item-card-gap;
+		position: relative;
+
+		&--success {
+			@include path;
+		}
+	}
+
+	&__chain {
+		display: flex;
+		flex-direction: column;
+		gap: $item-card-gap;
+
+		&--b {
+			flex-direction: column-reverse;
+		}
+	}
+}

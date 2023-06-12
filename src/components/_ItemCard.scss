@@ -1,0 +1,69 @@
+@use 'sass:map';
+@use '../sass/common/constants' as c;
+@use './Game';
+
+.item-card {
+	--btn-size: 15px;
+
+	display: flex;
+	flex-direction: row-reverse;
+	gap: map.get(c.$spaces, sm);
+	position: relative;
+
+	// stylelint-disable selector-class-pattern
+	.game__chain--b &:not(:first-of-type),
+	.game__chain--a &:not(:last-of-type) {
+		@include Game.path;
+
+		&::before {
+			bottom: 0;
+			transform: translateY(100%);
+		}
+	}
+	// stylelint-enable selector-class-pattern
+
+	&-btn {
+		flex-shrink: 0;
+		width: var(--btn-size);
+	}
+
+	&__content {
+		align-items: center;
+		display: flex;
+		flex-grow: 1;
+		gap: map.get(c.$spaces, sm);
+	}
+
+	&__img {
+		&-container {
+			aspect-ratio: 2 / 3;
+			flex-shrink: 0;
+			max-width: 120px;
+			width: 30%;
+		}
+
+		border-radius: c.$border-radius;
+		display: block;
+		width: 100%;
+
+		&--loading {
+			display: none;
+		}
+	}
+
+	&__text {
+		flex-grow: 1;
+	}
+
+
+	&__select {
+		border: 2px solid var(--color-accent);
+		border-radius: c.$border-radius;
+		height: map.get(c.$spaces, md);
+		width: 150px;
+
+		&:focus {
+			outline-color: var(--color-focus);
+		}
+	}
+}

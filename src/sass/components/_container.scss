@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../common/constants' as c;
+@use '../common/mixins' as *;
+
+.container {
+	$max-width-narrow: 600px;
+	$max-width-wide: map.get(c.$breakpoints, wide);
+	$max-width: map.get(c.$breakpoints, desktop);
+
+	--container-side-padding: #{map.get(c.$spaces, sm)};
+
+	margin: 0 auto;
+	max-width: var(--container-max-width, #{$max-width});
+	padding: 0 var(--container-side-padding);
+	width: 100%;
+
+	@include mq(tablet) {
+		--container-side-padding: #{map.get(c.$spaces, md)};
+	}
+
+	&--narrow {
+		--container-max-width: calc(#{$max-width-narrow} + (var(--container-side-padding) * 2));
+	}
+
+	&--wide {
+		--container-max-width: calc(#{$max-width-wide} + (var(--container-side-padding) * 2));
+	}
+}

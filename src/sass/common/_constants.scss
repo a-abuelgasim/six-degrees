@@ -1,0 +1,20 @@
+$border-radius: 8px;
+$transition: .2s ease-in-out;
+
+
+// BREAKPOINTS
+$breakpoints: (
+	tablet: 600px,
+	desktop: 1024px,
+	wide: 1440px
+);
+
+
+// SPACING
+$spaces: (
+	xs: 10px,
+	sm: 20px,
+	md: 40px,
+	lg: 60px,
+	xl: 80px,
+);
